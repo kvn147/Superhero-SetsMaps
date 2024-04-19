@@ -8,9 +8,9 @@ public class ExploringSetAndMap {
 
     public static void main(String[] args) {
         // exploringSet();
-       exploringMap();
+        // exploringMap();
 
-       // exploringSet("data/speech.txt");
+        exploringSet("data/speech.txt");
         //exploringMap("data/speech.txt");
     }
 
@@ -27,27 +27,27 @@ public class ExploringSetAndMap {
         // HashSet will not sort values - generally faster
         ListSet numbers3 = new ListSet();
 
-        // TODO: comment what does this loop do?
+        // Iterates through array data to add every integer in it
         for (int n : data) {
             numbers1.add(n);
             numbers2.add(n);
             numbers3.add(n);
         }
 
-        // TODO: comment what makes set different
+        // Sets do not repeat values
         System.out.println("numbers1 = " + numbers1);
         System.out.println("numbers2 = " + numbers2);
         System.out.println("numbers3 = " + numbers3);
 
-        // TODO: comment is the loop below allowable when working with a Set
+        // This loop does not work with a Set because there are no indices in Sets
 //         for (int i = 0; i < numbers2.size(); i++) {
 //             System.out.print(numbers2.get(i));
 //         }
 
-        // TODO: comment what does the loop below do
-//        for(int num : numbers3){
-//            System.out.print(num + " ");
-//        }
+        // Iterates through Set and prints each value
+        for(int num : numbers2){
+            System.out.print(num + " ");
+        }
 
     }
 
@@ -57,27 +57,29 @@ public class ExploringSetAndMap {
      */
     public static void exploringMap() {
 
-        Map<String, String> heros = new HashMap<>();
+        Map<String, String> heros = new TreeMap<>();
         heros.put("Batman", "Bruce Wayne");
         heros.put("Spiderman", "Peter Parker");
         heros.put("Catwoman", "Selina Kyle");
         heros.put("Ironman", "Tony Stark");
         heros.put("Superman", "Clark Kent");
         heros.put("Hulk", "Bruce Banner");
-        // TODO: comment what happens when we put the same key
-        // heros.put("Batman", "Terry McGinnnis");
 
-        // TODO: comment what the map toString() does
+        // Overwrites value "Bruce Wayne" to "Terry McGinnis"
+        // when we put same key for Batman
+        heros.put("Batman", "Terry McGinnnis");
+
+        // Prints the key (superhero) and its corresponding value (identity)
         System.out.println("Heros = " + heros +"\n");
 
-        // TODO: comment what this loop does
+        // iterates through map and prints each superhero and their identities
         for (String heroName : heros.keySet()) {
             System.out.println(heroName + " becomes " + heros.get(heroName) + " in everyday life.");
         }
 
         System.out.println();
 
-        // TODO: comment what this loop does
+        // iterates through map and prints each superhero and their identities
         for (Map.Entry<String, String> entry : heros.entrySet()) {
             System.out.println(entry.getKey() + " becomes " + entry.getValue() + " in everyday life.");
         }
@@ -90,16 +92,18 @@ public class ExploringSetAndMap {
      *
      * @param fileName - text file to be read
      */
+
     public static void exploringSet(String fileName) {
 
         try (Scanner input = new Scanner(new File(fileName))) {
 
             Set<String> words = new TreeSet<>();
 
-            // TODO: comment what does this loop do?
+            // Loops until end of Set and sets the string to lowercase
             while (input.hasNext()) {
                 String next = input.next().toLowerCase();
-                // TODO: comment what does adding to a set do?
+
+                // Add word to Set
                 words.add(next);
             }
 
@@ -118,26 +122,33 @@ public class ExploringSetAndMap {
      *
      * @param fileName - text file to be read
      */
+
     public static void exploringMap(String fileName) {
 
         try (Scanner input = new Scanner(new File(fileName))) {
             Map<String, Integer> words = new TreeMap<>();
 
-            // TODO: comment what does this loop do?
+            // Loops until end of set, sets words to lowercase.
+            // Then checks Map to add for first time, otherwise
+            // increment its count in Map
             while (input.hasNext()) {
                 String next = input.next().toLowerCase();
-                // TODO: what are we checking for here?
+
+                // Checks if word is on map
                 if (!words.containsKey(next)) {
-                    // TODO: what does this do?
+
+                    // Adds word to map for first time
                     words.put(next, 1);
                 } else {
-                    // TODO: what do these next two lines do?
+
+                    // Gets current count for word and increment it,
+                    // then puts it back in map
                     int currentCount = words.get(next);
                     words.put(next, currentCount + 1);
                 }
             }
 
-            System.out.println("List of words = " + words);
+            System.out.println("Map of words = " + words);
             System.out.println("Total unique words = " + words.size());
 
         } catch (FileNotFoundException e) {
